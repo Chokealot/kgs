@@ -1,0 +1,22 @@
+spring:
+  jpa.show-sql: true
+  jpa.hibernate.use-new-id-generator-mappings: false
+  datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource.url: ${SSO_HOST:jdbc:mysql://localhost:3306/sso?createDatabaseIfNotExist=true}
+  datasource.username: ${SSO_USERNAME:root}
+  datasource.password: ${SSO_PASSWORD:12345678}
+  main:
+    allow-bean-definition-overriding: true
+  liquibase:
+    change-log: db/sso-changelog.yml
+server:
+  port: 9988
+logging:
+  level:
+    root: info
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+        internal:
+          InstanceMetadataServiceResourceFetcher: error

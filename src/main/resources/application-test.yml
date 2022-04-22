@@ -7,7 +7,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   liquibase:
-    change-log: db/sso-changelog.yml
+    change-log: db/kgs-changelog.yml
     drop-first: true
 server:
   port: 9988

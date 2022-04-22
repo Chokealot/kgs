@@ -1,6 +1,8 @@
 package com.chokealot.konyiguitar.customer;
 
 import org.springframework.stereotype.Service;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Service
 public class CustomerService {
@@ -15,5 +17,21 @@ public class CustomerService {
 
     public Customer createCustomer(Customer customer) {
         return mapper.toDTO(repository.save(mapper.fromDTO(customer)));
+    }
+
+    public Customer getCustomerByName(String name) {
+        Customer customer = mapper.toDTO(repository.findByName(name));
+        return customer;
+    }
+
+    public Stream<Customer> getAllCustomers() {
+        return StreamSupport.stream(repository.findAll().spliterator(), false)
+                .map(mapper::toDTO);
+    }
+
+    public Customer deleteCustomerById(Long id) {
+        CustomerEntity customerToDelete = repository.findByIdNotOptional(id);
+        repository.delete(customerToDelete);
+        return mapper.toDTO(customerToDelete);
     }
 }

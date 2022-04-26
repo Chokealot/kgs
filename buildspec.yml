@@ -11,6 +11,7 @@ phases:
     - REPOSITORY_URI=900385795152.dkr.ecr.eu-north-1.amazonaws.com/kgs
     - echo Runing tests...
     - chmod +x gradlew
+    - java --version
     - echo hello ${COMMIT_HASH}
     - ./gradlew test
 

@@ -14,4 +14,5 @@ public class health {
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok().build();
     }
+    
 }

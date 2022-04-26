@@ -12,6 +12,10 @@ version = '0.0.1-SNAPSHOT'
 version = JavaVersion.VERSION_17
 sourceCompatibility = JavaVersion.VERSION_17
 
+apply plugin: 'java'
+sourceCompatibility = 17
+targetCompatibility = 17
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

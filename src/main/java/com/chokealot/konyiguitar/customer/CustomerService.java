@@ -25,7 +25,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id) {
-        Customer customer = mapper.toDTO(repository.findById(id).get());
+        Customer customer = mapper.toDTO(repository.findCustomerEntitiesById(id));
         return customer;
     }
 

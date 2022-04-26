@@ -4,7 +4,7 @@ databaseChangeLog:
       author: kgs
       changes:
         - createTable:
-            tableName: customer
+            tableName: customers
             columns:
               - column:
                   name: id
@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: id
@@ -59,7 +59,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: guitar
+            tableName: guitars
             columns:
               - column:
                   name: id
@@ -84,12 +84,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: information_a
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: information_b
+                  name: information
                   type: varchar(255)
                   constraints:
                     nullable: false
@@ -99,7 +94,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
-            tableName: order
+            tableName: orders
             columns:
               - column:
                   name: id
@@ -109,21 +104,21 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: customers_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_orders_customers
+                    references: customers(id)
+              - column:
+                  name: guitars_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_orders_guitars
+                    references: guitars(id)
+              - column:
                   name: order_number
                   type: varchar(255)
                   constraints:
                     nullable: false
-              - column:
-                  name: customer_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_order_customer
-                    references: customer(id)
-              - column:
-                  name: guitar_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_order_guitar
-                    references: guitar(id)

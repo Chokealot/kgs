@@ -9,8 +9,7 @@ public class Guitar {
     private String name;
     private String type;
     private int productionYear;
-    private String informationA;
-    private String informationB;
+    private String information;
     private double price;
 
 }

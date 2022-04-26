@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name = "guitar")
+@Entity(name = "guitars")
 public class GutiarEntity {
 
     @Id
@@ -21,8 +21,7 @@ public class GutiarEntity {
     private String name;
     private String type;
     private int productionYear;
-    private String informationA;
-    private String informationB;
+    private String information;
     private double price;
 
 }

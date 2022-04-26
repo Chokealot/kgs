@@ -1,10 +1,14 @@
 package com.chokealot.konyiguitar.order;
 
 import com.chokealot.konyiguitar.customer.CustomerRepository;
+import com.chokealot.konyiguitar.customer.CustomerService;
 import com.chokealot.konyiguitar.guitar.GuitarRepository;
+import com.chokealot.konyiguitar.guitar.GuitarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.UUID;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -15,18 +19,20 @@ public class OrderService {
     OrderRepository orderRepository;
 
     @Autowired
-    CustomerRepository customerRepository;
+    CustomerService customerService;
 
     @Autowired
-    GuitarRepository guitarRepository;
+    GuitarService guitarService;
 
     @Autowired
     OrderMapper mapper;
 
+    @Transactional
     public Order create(OrderModel model) {
         Order order = new Order();
-        order.setCustomer(customerRepository.getById(model.getCustomerId()));
-        order.setGuitar(guitarRepository.getById(model.getGuitarId()));
+        order.setCustomer(customerService.getCustomerById(model.getCustomerId()));
+        order.setGuitar(guitarService.get(model.getGuitarId()));
+        order.setOrderNumber(generateUuid());
         return mapper.toDTO(orderRepository.save(mapper.fromDTO(order)));
     }
 
@@ -43,5 +49,10 @@ public class OrderService {
         Order orderToDelete = mapper.toDTO(orderRepository.findOrderEntitiesByOrderNumber(orderNumber));
         orderRepository.delete(mapper.fromDTO(orderToDelete));
         return orderToDelete;
+    }
+
+    public String generateUuid() {
+        String id = UUID.randomUUID().toString();
+        return id;
     }
 }

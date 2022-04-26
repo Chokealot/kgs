@@ -12,19 +12,21 @@ import java.util.UUID;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name = "order")
+@Entity(name = "orders")
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String orderNumber = UUID.randomUUID().toString();
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customers_id")
     private CustomerEntity customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guitars_id")
     private GutiarEntity guitar;
+
+    private String orderNumber;
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name = "customer")
+@Entity(name = "customers")
 public class CustomerEntity {
 
     @Id

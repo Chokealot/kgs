@@ -13,5 +13,6 @@ public interface CustomerMapper {
     Customer toDTO(CustomerEntity customerEntity);
 
     CustomerEntity fromDTO(Customer customer);
+
     
 }

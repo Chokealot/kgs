@@ -14,5 +14,5 @@ public interface CustomerMapper {
 
     CustomerEntity fromDTO(Customer customer);
 
-    
+
 }

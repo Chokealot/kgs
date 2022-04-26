@@ -109,6 +109,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: order_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: customer_id
                   type: bigint
                   constraints:

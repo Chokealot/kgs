@@ -24,6 +24,11 @@ public class CustomerService {
         return customer;
     }
 
+    public Customer getCustomerById(Long id) {
+        Customer customer = mapper.toDTO(repository.findById(id).get());
+        return customer;
+    }
+
     public Stream<Customer> getAllCustomers() {
         return StreamSupport.stream(repository.findAll().spliterator(), false)
                 .map(mapper::toDTO);

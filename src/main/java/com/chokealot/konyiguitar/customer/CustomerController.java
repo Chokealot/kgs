@@ -36,8 +36,14 @@ public class CustomerController {
 
     @GetMapping("{name}")
     public ResponseEntity<Customer> getCustomerByName(@PathVariable String name) {
-        logger.info("Get one user");
+        logger.info("Get one customer");
         return ResponseEntity.ok(service.getCustomerByName(name));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+        logger.info("found Customer");
+        return ResponseEntity.ok(service.getCustomerById(id));
     }
 
     @GetMapping("")

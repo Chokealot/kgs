@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,6 +18,8 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String orderNumber = UUID.randomUUID().toString();
 
     @ManyToOne
     private CustomerEntity customer;

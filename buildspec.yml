@@ -4,7 +4,7 @@ phases:
     commands:
     - echo Logging in to Amazon ECR....
     - aws --version
-    - powershell 'docker login --username AWS -p $(aws ecr get-login-password --region eu-central-1 ) 900385795152.dkr.ecr.eu-central-1.amazonaws.com'
+    - docker login -u AWS -p $(aws ecr get-login-password --region eu-north-1) 900385795152.dkr.ecr.eu-north-1.amazonaws.com
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     - IMAGE_TAG=${COMMIT_HASH:=latest}
     - APPLICATION_NAME=kgs

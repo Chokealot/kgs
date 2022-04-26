@@ -1,7 +1,7 @@
 spring:
   jpa.show-sql: true
   jpa.hibernate.use-new-id-generator-mappings: false
-  datasource.url: jdbc:mysql://localhost:3306/sso?createDatabaseIfNotExist=true
+  datasource.url: jdbc:mysql://localhost:3306/kgs?createDatabaseIfNotExist=true
   datasource.username: root
   datasource.password: 12345678
   main:
@@ -10,7 +10,7 @@ spring:
     change-log: db/kgs-changelog.yml
     drop-first: true
 server:
-  port: 9988
+  port: 8877
 logging:
   level:
     com:

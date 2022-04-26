@@ -20,7 +20,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerByName(String name) {
-        Customer customer = mapper.toDTO(repository.findByName(name));
+        Customer customer = mapper.toDTO(repository.findByFirstname(name));
         return customer;
     }
 
@@ -30,7 +30,7 @@ public class CustomerService {
     }
 
     public Customer deleteCustomerById(Long id) {
-        CustomerEntity customerToDelete = repository.findByIdNotOptional(id);
+        CustomerEntity customerToDelete = repository.findById(id).get();
         repository.delete(customerToDelete);
         return mapper.toDTO(customerToDelete);
     }

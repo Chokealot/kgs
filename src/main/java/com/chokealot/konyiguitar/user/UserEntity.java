@@ -1,6 +1,7 @@
-package com.chokealot.konyiguitar.customer;
+package com.chokealot.konyiguitar.user;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Entity;
@@ -11,19 +12,19 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name = "customer")
-public class CustomerEntity {
+@Entity(name = "user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String firstname;
-    private String lastname;
+    @NonNull
     private String username;
+    @NonNull
     private String password;
+    @NonNull
     private String email;
-    private Long phone;
-    private String address;
+
+    public UserEntity() {}
 
 }

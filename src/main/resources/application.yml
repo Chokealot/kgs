@@ -10,7 +10,7 @@ spring:
   liquibase:
     change-log: db/kgs-changelog.yml
 server:
-  port: 9988
+  port: 8877
 logging:
   level:
     root: info

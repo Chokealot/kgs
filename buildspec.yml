@@ -1,0 +1,37 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+    - echo Logging in to Amazon ECR....
+    - aws --version
+    - docker login -u AWS -p $(aws ecr get-login-password --region eu-west-1) 900385795152.dkr.ecr.eu-north-1.amazonaws.com
+    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+    - IMAGE_TAG=${COMMIT_HASH:=latest}
+    - APPLICATION_NAME=kgs
+    - REPOSITORY_URI=900385795152.dkr.ecr.eu-north-1.amazonaws.com/kgs
+    - echo Runing tests...
+    - chmod +x gradlew
+    - echo hello ${COMMIT_HASH}
+    - ./gradlew test
+
+  build: 
+    commands:
+    - echo Build started on `date` 
+    - echo Building the Docker image...
+    - docker build -t $APPLICATION_NAME .
+  post_build:
+    commands: 
+    - echo Build completed on `date`
+    - echo pushing to repo with tag 'latest'
+    - docker tag $APPLICATION_NAME $REPOSITORY_URI
+    - docker push $REPOSITORY_URI
+    - echo pushing to repo with tag $IMAGE_TAG
+    - docker tag $APPLICATION_NAME $REPOSITORY_URI:$IMAGE_TAG
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - echo Writing image definitions file... 
+    - printf '[{"name":"kgs","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+    - cat imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
+

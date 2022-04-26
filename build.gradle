@@ -9,7 +9,8 @@ plugins {
 
 group = 'com.chokealot'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+version = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {

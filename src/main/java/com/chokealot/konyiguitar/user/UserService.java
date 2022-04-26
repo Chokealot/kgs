@@ -15,6 +15,7 @@ public class UserService {
     @Autowired
     UserMapper mapper;
 
+    
     public User createUser(User user) {
         if (repository.findUserEntityByUsername(user.getUsername()) == null) {
             return mapper.toDTO(repository.save(mapper.fromDTO(user)));

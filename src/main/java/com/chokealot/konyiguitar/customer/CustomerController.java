@@ -28,19 +28,20 @@ public class CustomerController {
         try {
             customerToCreate = service.createCustomer(customer);
             logger.info("A customer has been created");
+            return ResponseEntity.ok(customerToCreate);
         } catch (IllegalArgumentException e) {
-            new ResponseEntity("", HttpStatus.NOT_ACCEPTABLE);
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.created(URI.create("api/v1/customer"+customerToCreate.getId())).build();
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<Customer> getCustomerByName(@PathVariable String name) {
         logger.info("Get one customer");
         return ResponseEntity.ok(service.getCustomerByName(name));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
         logger.info("found Customer");
         return ResponseEntity.ok(service.getCustomerById(id));
@@ -52,7 +53,7 @@ public class CustomerController {
         return ResponseEntity.ok(service.getAllCustomers());
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
         service.deleteCustomerById(id);
         logger.info("Deleted customer with id["+id+"]");

@@ -31,7 +31,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<User> getByUsername(@PathVariable String username) {
         try {
             User user = service.getUser(username);
@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{username}")
+    @DeleteMapping("/{username}")
     public ResponseEntity<String> delete(@PathVariable String username) {
         logger.info("User ["+username+"] has been deleted");
         return ResponseEntity.ok(service.deleteUser(username));

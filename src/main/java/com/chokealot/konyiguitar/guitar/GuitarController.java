@@ -32,7 +32,7 @@ public class GuitarController {
         }
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Guitar> getGuitar(@PathVariable Long id) {
         try {
             Guitar guitar = service.get(id);
@@ -56,7 +56,7 @@ public class GuitarController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Guitar> deleteGuitar(@PathVariable Long id) {
         try {
             Guitar guitar = service.get(id);

@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: phone
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:

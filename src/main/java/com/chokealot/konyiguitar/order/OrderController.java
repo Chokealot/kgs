@@ -30,7 +30,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping("{orderNumber}")
+    @GetMapping("/{orderNumber}")
     public ResponseEntity<Order> getOrderByOrderNumber(@PathVariable String orderNumber) {
         try {
             Order order = service.getOrder(orderNumber);
@@ -54,7 +54,7 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("{orderNumber}")
+    @DeleteMapping("/{orderNumber}")
     public ResponseEntity<Order> deleteOrder(@PathVariable String orderNumber) {
         try {
             Order orderToDelete = service.getOrder(orderNumber);

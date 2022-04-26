@@ -20,7 +20,7 @@ public class CustomerEntity {
 
     private String firstname;
     private String lastname;
-    private Long phone;
+    private String phone;
     private String address;
 
 }

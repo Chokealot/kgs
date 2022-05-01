@@ -4,6 +4,33 @@ databaseChangeLog:
       author: kgs
       changes:
         - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
             tableName: customers
             columns:
               - column:
@@ -33,31 +60,13 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-        - createTable:
-            tableName: users
-            columns:
               - column:
-                  name: id
+                  name: users_id
                   type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: username
-                  type: varchar(255)
                   constraints:
                     nullable: false
-              - column:
-                  name: password
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: email
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
+                    foreignKeyName: fk_customers_users
+                    references: users(id)
         - createTable:
             tableName: guitars
             columns:

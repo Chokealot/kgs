@@ -1,5 +1,6 @@
 package com.chokealot.konyiguitar.customer;
 
+import com.chokealot.konyiguitar.user.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;

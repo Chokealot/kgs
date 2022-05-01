@@ -1,6 +1,8 @@
 package com.chokealot.konyiguitar.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Stream;
@@ -15,9 +17,13 @@ public class UserService {
     @Autowired
     UserMapper mapper;
 
+    BCryptPasswordEncoder cryptPasswordEncoder = new BCryptPasswordEncoder();
+
 
     public User createUser(User user) {
         if (repository.findUserEntityByUsername(user.getUsername()) == null) {
+            String x = cryptPasswordEncoder.encode(user.getPassword());
+            user.setPassword(x);
             return mapper.toDTO(repository.save(mapper.fromDTO(user)));
         }
         return user;

@@ -1,12 +1,10 @@
 package com.chokealot.konyiguitar.customer;
 
+import com.chokealot.konyiguitar.user.UserEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -23,4 +21,7 @@ public class CustomerEntity {
     private String phone;
     private String address;
 
+    @OneToOne
+    @JoinColumn(name = "users_id")
+    private UserEntity user;
 }

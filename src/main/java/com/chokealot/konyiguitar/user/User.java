@@ -1,7 +1,6 @@
 package com.chokealot.konyiguitar.user;
 
 import lombok.Data;
-
 import javax.annotation.Nullable;
 
 @Data

@@ -1,16 +1,17 @@
 package com.chokealot.konyiguitar.customer;
 
-import com.chokealot.konyiguitar.user.User;
+import com.chokealot.konyiguitar.user.UserEntity;
 import lombok.Data;
 
-@Data
-public class Customer {
+import javax.persistence.OneToOne;
 
-    private Long id;
+@Data
+public class CustomerRequestModel {
+
     private String firstname;
     private String lastname;
     private String phone;
     private String address;
-    private User user;
+    private String username;
 
 }

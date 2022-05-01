@@ -2,10 +2,19 @@ spring:
   jpa.show-sql: true
   jpa.hibernate.use-new-id-generator-mappings: false
   datasource.driver-class-name: com.mysql.cj.jdbc.Driver
-  datasource.url: jdbc:mysql://kgs-database.cbdv4cgnmeky.eu-north-1.rds.amazonaws.com/kgs?createDatabaseIfNotExist=true
-#  datasource.url: jdbc:mysql://localhost:3306/kgs?createDatabaseIfNotExist=true
-  datasource.username: root
-  datasource.password: 12345678
+#  datasource.url: jdbc:mysql://kgs-database.cbdv4cgnmeky.eu-north-1.rds.amazonaws.com/kgs?createDatabaseIfNotExist=true
+  datasource.url: ${SSO_HOST:jdbc:mysql://localhost:3306/kgs?createDatabaseIfNotExist=true}
+  datasource.username: ${SSO_USERNAME:root}
+  datasource.password: ${SSO_PASSWORD:12345678}
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy=org:
+          hibernate:
+            boot:
+              model:
+                naming:
+                  PhysicalNamingStrategyStandardImpl
   main:
     allow-bean-definition-overriding: true
   liquibase:

@@ -26,6 +26,10 @@ public class GuitarService {
         return mapper.toDTO(repository.findById(id).get());
     }
 
+    public Guitar update(Long id, Guitar guitar) {
+        return mapper.toDTO(repository.save(mapper.fromDTO(updateGuitarMap(id, guitar))));
+    }
+
     public Stream<Guitar> getAll() {
         return StreamSupport.stream(repository.findAll().spliterator(), false)
                 .map(mapper::toDTO);
@@ -35,4 +39,15 @@ public class GuitarService {
         repository.deleteById(id);
         return "User deleted!";
     }
+
+    private Guitar updateGuitarMap(Long id, Guitar guitar) {
+        Guitar updatedGuitar = mapper.toDTO(repository.getById(id));
+        updatedGuitar.setName(guitar.getName());
+        updatedGuitar.setType(guitar.getType());
+        updatedGuitar.setPrice(guitar.getPrice());
+        updatedGuitar.setProductionYear(guitar.getProductionYear());
+        updatedGuitar.setInformation(guitar.getInformation());
+        return updatedGuitar;
+    }
+
 }

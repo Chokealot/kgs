@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Stream;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/v1/guitars")
 public class GuitarController {
@@ -33,6 +35,7 @@ public class GuitarController {
             return ResponseEntity.badRequest().build();
         }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Guitar> getGuitar(@PathVariable Long id) {
@@ -65,6 +68,18 @@ public class GuitarController {
             logger.info("Deleting guitar with id "+id);
             return ResponseEntity.ok(guitar);
         } catch (IllegalArgumentException e) {
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Guitar> updateGuitar(@PathVariable Long id, @RequestBody Guitar guitar) {
+        try {
+            logger.info("Updating guitar...");
+            return ResponseEntity.ok(service.update(id, guitar));
+        } catch (IllegalArgumentException e) {
+            logger.warn("Update was unsuccessful");
             logger.warn(e.getMessage());
             return ResponseEntity.badRequest().build();
         }

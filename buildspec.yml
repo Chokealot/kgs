@@ -9,10 +9,12 @@ phases:
     - IMAGE_TAG=${COMMIT_HASH:=latest}
     - APPLICATION_NAME=kgs
     - REPOSITORY_URI=900385795152.dkr.ecr.eu-north-1.amazonaws.com/kgs
-    - echo Runing tests...
-    - chmod +x gradlew
+    - echo Searching for java version...
     - java --version
-    - echo hello ${COMMIT_HASH}
+    - echo Searching for Gradle...
+    - chmod +x gradlew
+    - ./gradlew --version
+    - echo Runing tests...
     - ./gradlew test
 
   build: 

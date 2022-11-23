@@ -2,19 +2,9 @@ spring:
   jpa.show-sql: true
   jpa.hibernate.use-new-id-generator-mappings: false
   datasource.driver-class-name: com.mysql.cj.jdbc.Driver
-#  datasource.url: jdbc:mysql://kgs-database.cbdv4cgnmeky.eu-north-1.rds.amazonaws.com/kgs?createDatabaseIfNotExist=true
-  datasource.url: ${SSO_HOST:jdbc:mysql://localhost:3306/kgs?createDatabaseIfNotExist=true}
-  datasource.username: ${SSO_USERNAME:root}
-  datasource.password: ${SSO_PASSWORD:12345678}
-  jpa:
-    hibernate:
-      naming:
-        physical-strategy=org:
-          hibernate:
-            boot:
-              model:
-                naming:
-                  PhysicalNamingStrategyStandardImpl
+  datasource.url: jdbc:mysql://localhost:3306/kgs?createDatabaseIfNotExist=true
+  datasource.username: root
+  datasource.password: 12345678
   main:
     allow-bean-definition-overriding: true
   liquibase:
@@ -30,3 +20,6 @@ logging:
           EC2MetadataUtils: error
         internal:
           InstanceMetadataServiceResourceFetcher: error
+jwt:
+  secret: 2f472709-cc93-4c26-b332-00712ed9f8a8
+

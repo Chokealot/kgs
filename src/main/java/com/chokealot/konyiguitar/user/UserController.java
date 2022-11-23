@@ -38,6 +38,7 @@ public class UserController {
             logger.info("User ["+user.getUsername()+"] found!");
             return ResponseEntity.ok(user);
         } catch (IllegalArgumentException e) {
+            logger.warn("Error while trying to get a user by name");
             logger.warn(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
@@ -50,6 +51,7 @@ public class UserController {
             logger.info("Stream of user's has been found");
             return ResponseEntity.ok(stream);
         } catch (IllegalArgumentException e) {
+            logger.warn("Error while getting Stream of users");
             logger.warn(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
@@ -57,7 +59,13 @@ public class UserController {
 
     @DeleteMapping("/{username}")
     public ResponseEntity<String> delete(@PathVariable String username) {
-        logger.info("User ["+username+"] has been deleted");
-        return ResponseEntity.ok(service.deleteUser(username));
+        try {
+            logger.info("User ["+username+"] has been deleted");
+            return ResponseEntity.ok(service.deleteUser(username));
+        } catch (Exception e) {
+            logger.warn("Error while trying to delete");
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

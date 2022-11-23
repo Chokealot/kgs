@@ -28,7 +28,7 @@ public class OrderService {
     OrderMapper mapper;
 
     @Transactional
-    public Order create(OrderModel model) {
+    public Order create(OrderModel model) throws IllegalArgumentException {
         Order order = new Order();
         order.setCustomer(customerService.getCustomerById(model.getCustomerId()));
         order.setGuitar(guitarService.get(model.getGuitarId()));

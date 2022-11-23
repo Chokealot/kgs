@@ -19,3 +19,5 @@ logging:
           EC2MetadataUtils: error
         internal:
           InstanceMetadataServiceResourceFetcher: error
+jwt:
+  secret: 2f472709-cc93-4c26-b332-00712ed9f8a8

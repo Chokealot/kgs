@@ -22,10 +22,10 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@RequestBody OrderModel model) {
         try {
             Order order = service.create(model);
-            logger.info("Creating new order");
+            logger.info(makeItPretty("Creating new order"));
             return ResponseEntity.ok(order);
-        } catch (IllegalArgumentException e) {
-            logger.warn(e.getMessage());
+        } catch (Exception e) {
+            logger.warn(makeItPretty(e.getMessage()));
             return ResponseEntity.badRequest().build();
         }
     }
@@ -34,10 +34,10 @@ public class OrderController {
     public ResponseEntity<Order> getOrderByOrderNumber(@PathVariable String orderNumber) {
         try {
             Order order = service.getOrder(orderNumber);
-            logger.info("Found order "+order);
+            logger.info(makeItPretty("Found order "+order));
             return ResponseEntity.ok(order);
         } catch (IllegalArgumentException e) {
-            logger.warn(e.getMessage());
+            logger.warn(makeItPretty(e.getMessage()));
             return ResponseEntity.badRequest().build();
         }
     }
@@ -46,10 +46,10 @@ public class OrderController {
     public ResponseEntity<Stream<Order>> getAllOrders() {
         try {
             Stream<Order> stream = service.getAllOrders();
-            logger.info("found stream: "+stream);
+            logger.info(makeItPretty("found stream: "+stream));
             return ResponseEntity.ok(stream);
         } catch (IllegalArgumentException e) {
-            logger.warn(e.getMessage());
+            logger.warn(makeItPretty(e.getMessage()));
             return  ResponseEntity.badRequest().build();
         }
     }
@@ -58,11 +58,19 @@ public class OrderController {
     public ResponseEntity<Order> deleteOrder(@PathVariable String orderNumber) {
         try {
             Order orderToDelete = service.getOrder(orderNumber);
-            logger.info("Deleting order: "+orderToDelete);
+            logger.info(makeItPretty("Deleting order: "+orderToDelete));
             return ResponseEntity.ok(service.deleteOrder(orderNumber));
         } catch (IllegalArgumentException e) {
-            logger.warn(e.getMessage());
+            logger.warn(makeItPretty(e.getMessage()));
             return ResponseEntity.badRequest().build();
         }
+    }
+    public String makeItPretty(String message) {
+        String msgLength = "|| "+message+" ||";
+        String layer = "";
+        for (int x=0; x <= msgLength.length(); x++) {
+            layer += "*";
+        }
+        return "\n" + layer + "\n" + msgLength + "\n" + layer;
     }
 }

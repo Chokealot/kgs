@@ -20,18 +20,14 @@ public class CustomerController {
 
     private CustomerService service;
 
-    @Autowired
-    private UserService userService;
-
     public CustomerController(CustomerService service) {
         this.service = service;
     }
 
     @PostMapping("")
     public ResponseEntity<Customer> createCustomer(@RequestBody CustomerRequestModel model) {
-        Customer customerToCreate = new Customer();
         try {
-            customerToCreate = service.createCustomer(model);
+            Customer customerToCreate = service.createCustomer(model);
             logger.info("A customer has been created");
             return ResponseEntity.ok(customerToCreate);
         } catch (IllegalArgumentException e) {
@@ -42,26 +38,52 @@ public class CustomerController {
 
     @GetMapping("/{name}")
     public ResponseEntity<Customer> getCustomerByName(@PathVariable String name) {
-        logger.info("Get one customer");
-        return ResponseEntity.ok(service.getCustomerByName(name));
+        try {
+            Customer customer = service.getCustomerByName(name);
+            logger.info("Getting a customer by name");
+            return ResponseEntity.ok(customer);
+        } catch (IllegalArgumentException e) {
+            logger.warn("Error while trying to get a customer by name");
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
-        logger.info("found Customer");
-        return ResponseEntity.ok(service.getCustomerById(id));
+        try {
+            Customer customer = service.getCustomerById(id);
+            logger.info("found Customer");
+            return ResponseEntity.ok(customer);
+        } catch (IllegalArgumentException e) {
+            logger.warn("Error while trying to get a customer by id");
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("")
     public ResponseEntity<Stream<Customer>> getAllCustomers() {
-        logger.info("Getting all customers");
-        return ResponseEntity.ok(service.getAllCustomers());
+        try {
+            logger.info("Getting all customers");
+            return ResponseEntity.ok(service.getAllCustomers());
+        } catch (IllegalArgumentException e) {
+            logger.warn("Error while trying to get all customers");
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
-        service.deleteCustomerById(id);
-        logger.info("Deleted customer with id["+id+"]");
-        return ResponseEntity.ok("Deleted customer with id["+id+"]");
+        try {
+            service.deleteCustomerById(id);
+            logger.info("Customer has been deleted");
+            return ResponseEntity.ok("Deleted");
+        } catch (IllegalArgumentException e) {
+            logger.warn("No customer to delete with that id");
+            logger.warn(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

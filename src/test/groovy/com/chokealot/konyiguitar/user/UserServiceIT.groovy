@@ -51,6 +51,7 @@ class UserServiceIT extends Specification{
 
         def result = given()
                 .contentType(ContentType.JSON)
+                //.header("Authorization", "Bearer 2f472709-cc93-4c26-b332-00712ed9f8a8")
                 .body(user)
                 .when()
                 .post("users")
